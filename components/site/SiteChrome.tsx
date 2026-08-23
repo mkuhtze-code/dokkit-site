@@ -39,7 +39,7 @@ export function SiteFooter() {
       <div className="site-footer-inner">
         <div className="footer-intro">
           <Link href="/" className="site-footer-brand">Dokkit</Link>
-          <p>A personal thinking tool that understands time.</p>
+          <p>A personal thinking tool that adapts around you.</p>
         </div>
         <div className="footer-links" aria-label="Footer navigation">
           <div><strong>Explore</strong><Link href="/how-it-works">How it works</Link><Link href="/features">Features</Link><Link href="/pricing">Pricing</Link><Link href="/about">About</Link><Link href="/faq">FAQ</Link></div>

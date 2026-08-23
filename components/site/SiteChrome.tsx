@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import DokkitMark from './DokkitMark';
 
 const links = [
   { href: '/how-it-works', label: 'How it works' },
@@ -14,20 +15,14 @@ export function AppLink({ children, className = 'btn btn-steel' }: Readonly<{ ch
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <Link href="/" className="site-brand" aria-label="Dokkit home">Dokkit</Link>
+      <Link href="/" className="site-brand" aria-label="Dokkit home"><DokkitMark /><span>Dokkit</span></Link>
       <nav className="site-nav" aria-label="Primary navigation">
-        <div className="site-nav-links">
-          {links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}
-        </div>
+        <div className="site-nav-links">{links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}</div>
         <AppLink className="btn btn-steel site-sign-in">Sign in</AppLink>
       </nav>
       <details className="site-menu">
         <summary aria-label="Open navigation">Menu</summary>
-        <nav aria-label="Mobile navigation">
-          {links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}
-          <Link href="/faq">FAQ</Link>
-          <AppLink>Try Dokkit</AppLink>
-        </nav>
+        <nav aria-label="Mobile navigation">{links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}<Link href="/faq">FAQ</Link><AppLink>Try Dokkit</AppLink></nav>
       </details>
     </header>
   );
@@ -38,7 +33,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="footer-intro">
-          <Link href="/" className="site-footer-brand">Dokkit</Link>
+          <Link href="/" className="site-footer-brand"><DokkitMark /><span>Dokkit</span></Link>
           <p>A personal thinking tool that adapts around you.</p>
         </div>
         <div className="footer-links" aria-label="Footer navigation">

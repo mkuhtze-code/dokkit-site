@@ -7,6 +7,7 @@ import TravelSnapshot from '@/components/site/TravelSnapshot';
 import PatternsSnapshot from '@/components/site/PatternsSnapshot';
 import FaqList from '@/components/site/FaqList';
 import Reveal from '@/components/site/Reveal';
+import DokkitMark from '@/components/site/DokkitMark';
 import { AppLink } from '@/components/site/SiteChrome';
 
 const steps = ['Capture what needs doing.', 'Let Dokkit observe what the work is like.', 'Dokkit remembers what matters.', 'Reality changes? Dokkit reshapes the plan.'];
@@ -17,6 +18,7 @@ export default function Home() {
       <section className="site-section site-hero">
         <div className="site-section-inner hero-copy">
           <Reveal><p className="eyebrow">A thinking tool for real work</p></Reveal>
+          <DokkitMark decorative className="hero-mark" />
           <Reveal delay={80}><h1>You don&apos;t need to do more.<br />You need to know what fits.</h1></Reveal>
           <Reveal delay={160}><p className="section-lead">Dokkit is a personal thinking tool that observes how you work and quietly adapts around you. Your plans change. Your priorities change. Your days change. Dokkit changes with them.</p></Reveal>
           <Reveal delay={220}><div className="cta-row"><AppLink>Try Dokkit</AppLink><a href="#how-it-works" className="btn btn-ghost">How it works</a></div></Reveal>
@@ -39,7 +41,7 @@ export default function Home() {
       </section>
 
       <section className="site-section section-copy">
-        <div className="site-section-inner"><Reveal><p className="eyebrow">Built differently</p></Reveal><Reveal delay={80}><h2>The tool should fit the work — not the other way around.</h2></Reveal><Reveal delay={140}><p>Dokkit does not judge you against a rigid system. Its language reflects a different relationship: plans can change, work can carry forward, and what happened is useful information.</p></Reveal><Reveal delay={190}><div className="reframe-list"><div className="reframe-row"><span className="reframe-old">Overdue</span><span aria-hidden="true">→</span><span className="reframe-new">Carrying forward</span></div><div className="reframe-row"><span className="reframe-old">Inbox</span><span aria-hidden="true">→</span><span className="reframe-new">Capture</span></div><div className="reframe-row"><span className="reframe-old">Failure</span><span aria-hidden="true">→</span><span className="reframe-new">Information</span></div><div className="reframe-row"><span className="reframe-old">Rigid plan</span><span aria-hidden="true">→</span><span className="reframe-new">Living plan</span></div></div></Reveal></div>
+        <div className="site-section-inner"><Reveal><p className="eyebrow eyebrow-with-mark"><DokkitMark decorative />Built differently</p></Reveal><Reveal delay={80}><h2>The tool should fit the work — not the other way around.</h2></Reveal><Reveal delay={140}><p>Dokkit does not judge you against a rigid system. Its language reflects a different relationship: plans can change, work can carry forward, and what happened is useful information.</p></Reveal><Reveal delay={190}><div className="reframe-list"><div className="reframe-row"><span className="reframe-old">Overdue</span><span aria-hidden="true">→</span><span className="reframe-new">Carrying forward</span></div><div className="reframe-row"><span className="reframe-old">Inbox</span><span aria-hidden="true">→</span><span className="reframe-new">Capture</span></div><div className="reframe-row"><span className="reframe-old">Failure</span><span aria-hidden="true">→</span><span className="reframe-new">Information</span></div><div className="reframe-row"><span className="reframe-old">Rigid plan</span><span aria-hidden="true">→</span><span className="reframe-new">Living plan</span></div></div></Reveal></div>
       </section>
 
       <section className="site-section section-copy"><div className="site-section-inner"><Reveal><p className="eyebrow">Jobs</p></Reveal><Reveal delay={80}><h2>Work doesn&apos;t arrive in neat little boxes.</h2></Reveal><Reveal delay={140}><p>Dokkit lets jobs, tasks and the things around them fit together naturally. A site visit, quote revision, installation or follow-up can stay connected to the work it belongs to—without turning your day into a project-management exercise.</p></Reveal></div><Reveal delay={200}><div className="site-section-wide"><JobsSnapshot /></div></Reveal></section>
@@ -58,7 +60,7 @@ export default function Home() {
 
       <section className="site-section section-copy origin-section"><div className="site-section-inner"><Reveal><p className="eyebrow">Origin</p></Reveal><Reveal delay={80}><h2>Built because I needed it.</h2></Reveal><Reveal delay={140}><p>Dokkit began with days that changed shape by the hour. A paper list could remember the work, but it could not say what still fit, what needed to wait, or what real experience had already taught.</p></Reveal></div></section>
 
-      <section className="site-section final-cta"><div className="site-section-inner"><Reveal><h2>You don&apos;t need to do more.<br />You need to know what fits.</h2></Reveal><Reveal delay={100}><p>Dokkit adapts to the way you work, so you don&apos;t have to adapt yourself to the tool.</p></Reveal><Reveal delay={160}><AppLink>Try Dokkit</AppLink></Reveal></div></section>
+      <section className="site-section final-cta"><div className="site-section-inner"><DokkitMark decorative className="final-cta-mark" /><Reveal><h2>You don&apos;t need to do more.<br />You need to know what fits.</h2></Reveal><Reveal delay={100}><p>Dokkit adapts to the way you work, so you don&apos;t have to adapt yourself to the tool.</p></Reveal><Reveal delay={160}><AppLink>Try Dokkit</AppLink></Reveal></div></section>
     </main>
   );
 }

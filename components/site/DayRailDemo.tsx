@@ -1,101 +1,89 @@
 'use client';
 
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const WORK_START_MIN = 8 * 60;
 const WORK_END_MIN = 16 * 60;
-const LOOP_MS = 13000;
+const LOOP_MS = 12000;
 
-const DEMO_TASKS: { label: string; atPercent: number }[] = [
-  { label: 'Client reply', atPercent: 10 },
-  { label: 'Revise quote', atPercent: 36 },
-  { label: 'Site visit', atPercent: 64 },
-  { label: 'Proposal', atPercent: 90 },
-];
+const TASKS = [
+  { label: 'Client reply', time: '8:45', duration: '15m', atPercent: 11 },
+  { label: 'Revise quote', time: '10:30', duration: '45m', atPercent: 34 },
+  { label: 'Site visit', time: '1:00', duration: '1h', atPercent: 62 },
+  { label: 'Proposal', time: '3:15', duration: '90m', atPercent: 90 },
+] as const;
 
-function fmtClock(minutesOfDay: number): string {
-  let h = Math.floor(minutesOfDay / 60);
-  const m = Math.floor(minutesOfDay % 60);
-  const ampm = h >= 12 ? 'p' : 'a';
-  h = h % 12;
-  if (h === 0) h = 12;
-  return m === 0 ? `${h}${ampm}` : `${h}:${String(m).padStart(2, '0')}${ampm}`;
+function formatTime(minutesOfDay: number): string {
+  let hour = Math.floor(minutesOfDay / 60);
+  const minute = Math.floor(minutesOfDay % 60);
+  const suffix = hour >= 12 ? 'pm' : 'am';
+  hour %= 12;
+  if (hour === 0) hour = 12;
+  return minute === 0 ? `${hour}${suffix}` : `${hour}:${String(minute).padStart(2, '0')}${suffix}`;
 }
 
 export default function DayRailDemo() {
-  const [percent, setPercent] = useState(0);
+  const [progress, setProgress] = useState(0);
   const startRef = useRef<number | null>(null);
   const frameRef = useRef<number>(0);
 
   useEffect(() => {
-    function tick(now: number) {
-      if (startRef.current === null) startRef.current = now;
-      const elapsed = (now - startRef.current) % LOOP_MS;
-      setPercent((elapsed / LOOP_MS) * 100);
+    const tick = (now: number) => {
+      startRef.current ??= now;
+      setProgress(((now - startRef.current) % LOOP_MS) / LOOP_MS * 100);
       frameRef.current = requestAnimationFrame(tick);
-    }
+    };
+
     frameRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frameRef.current);
   }, []);
 
-  const currentMinutes =
-    WORK_START_MIN + (percent / 100) * (WORK_END_MIN - WORK_START_MIN);
-  const carryForwardThreshold =
-    DEMO_TASKS[DEMO_TASKS.length - 1].atPercent;
+  const currentMinutes = WORK_START_MIN + (progress / 100) * (WORK_END_MIN - WORK_START_MIN);
+  const remainingMinutes = Math.max(0, Math.round(WORK_END_MIN - currentMinutes));
+  const completedCount = TASKS.filter((task) => progress >= task.atPercent && task.atPercent !== 90).length;
+  const carryingForward = progress >= 90;
 
   return (
-    <div
-      className="rail-demo"
-      role="img"
-      aria-label="Animated demonstration of Dokkit's daily capacity view"
-    >
-      <div className="rail-demo-readout">
-        <span className="rail-demo-time mono">{fmtClock(currentMinutes)}</span>
-        <span className="rail-demo-label">today</span>
+    <section className="rail-demo" aria-label="Animated demonstration of Dokkit understanding what fits into a day">
+      <header className="rail-demo-header">
+        <div>
+          <p className="rail-demo-kicker">Today</p>
+          <p className="rail-demo-time mono">{formatTime(currentMinutes)}</p>
+        </div>
+        <div className="rail-demo-capacity">
+          <span className="rail-demo-capacity-value mono">{Math.floor(remainingMinutes / 60)}h {remainingMinutes % 60}m</span>
+          <span>left to work with</span>
+        </div>
+      </header>
+
+      <div className="rail-demo-progress" aria-hidden="true">
+        <div className="rail-demo-progress-fill" style={{ width: `${progress}%` }} />
+        <span className="rail-demo-progress-now" style={{ left: `${progress}%` }} />
       </div>
 
-      <div className="rail-demo-track">
-        <div
-          className="rail-demo-elapsed"
-          style={{ width: `${percent}%` }}
-        />
-        <div
-          className="rail-demo-now-dot"
-          style={{ left: `${percent}%` }}
-        />
-        {DEMO_TASKS.map((t, i) => {
-          const resolved =
-            percent >= t.atPercent &&
-            t.atPercent !== carryForwardThreshold;
-          const carrying =
-            t.atPercent === carryForwardThreshold && percent >= t.atPercent;
-          const tier = i % 2 === 0 ? 'near' : 'far';
+      <div className="rail-demo-summary">
+        <span>{completedCount} of 3 planned tasks done</span>
+        <span>{carryingForward ? 'one task carried forward' : 'the day still fits'}</span>
+      </div>
+
+      <ol className="rail-demo-list">
+        {TASKS.map((task) => {
+          const complete = task.atPercent !== 90 && progress >= task.atPercent;
+          const carrying = task.atPercent === 90 && carryingForward;
+          const state = carrying ? 'carrying' : complete ? 'complete' : 'planned';
+
           return (
-            <Fragment key={t.label}>
-              <div
-                className={`rail-demo-marker tier-${tier} ${resolved ? 'resolved' : ''} ${carrying ? 'carrying' : ''}`}
-                style={{ left: `${t.atPercent}%` }}
-              >
-                <span className="rail-demo-marker-dot" />
-                <span className="rail-demo-marker-label">{t.label}</span>
-              </div>
-              {carrying && (
-                <div
-                  className="rail-demo-carry-tag"
-                  style={{ left: `${t.atPercent}%` }}
-                >
-                  carrying forward
-                </div>
-              )}
-            </Fragment>
+            <li className={`rail-demo-task is-${state}`} key={task.label}>
+              <span className="rail-demo-status" aria-hidden="true">{complete ? '✓' : carrying ? '→' : ''}</span>
+              <span className="rail-demo-task-copy">
+                <strong>{task.label}</strong>
+                <span>{carrying ? 'carrying forward' : task.time}</span>
+              </span>
+              <span className="rail-demo-duration mono">{task.duration}</span>
+            </li>
           );
         })}
-      </div>
-
-      <div className="rail-demo-endpoints">
-        <span>{fmtClock(WORK_START_MIN)}</span>
-        <span>{fmtClock(WORK_END_MIN)}</span>
-      </div>
-    </div>
+      </ol>
+    </section>
   );
 }

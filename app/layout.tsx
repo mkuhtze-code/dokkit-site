@@ -9,10 +9,10 @@ const spaceMono = Space_Mono({ subsets: ['latin'], variable: '--font-space-mono'
 
 export const metadata: Metadata = {
   title: { default: 'Dokkit — Know What Fits', template: '%s — Dokkit' },
-  description: 'Dokkit is a personal thinking tool that understands time. See what fits in your day, adapt when reality changes, and remember how long things actually take.',
+  description: 'Dokkit is a personal thinking tool that observes how you work, remembers what it learns, and adapts when reality changes.',
   metadataBase: new URL('https://dokkit.space'),
-  openGraph: { title: 'Dokkit — Know What Fits', description: 'A personal thinking tool that understands time. See what fits in your day and adapt when reality changes.', url: '/', siteName: 'Dokkit', locale: 'en_NZ', type: 'website' },
-  twitter: { card: 'summary', title: 'Dokkit — Know What Fits', description: 'A personal thinking tool that understands time.' },
+  openGraph: { title: 'Dokkit — Know What Fits', description: 'A personal thinking tool that observes how you work and adapts when reality changes.', url: '/', siteName: 'Dokkit', locale: 'en_NZ', type: 'website' },
+  twitter: { card: 'summary', title: 'Dokkit — Know What Fits', description: 'A personal thinking tool that adapts around the way you work.' },
   robots: { index: true, follow: true },
 };
 

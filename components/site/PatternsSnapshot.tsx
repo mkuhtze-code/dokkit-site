@@ -1,41 +1,29 @@
-/**
- * Static representation of Dokkit's Patterns surface.
- * Shows estimate accuracy and plain-language observations.
- *
- * Placeholder for real product screenshots.
- */
+const observations = [
+  ['Quote revision', 'usually 45m', 'well known'],
+  ['Site visit', 'usually 30m', 'fairly confident'],
+  ['Material order', 'usually 10m', 'just noticed'],
+];
 
 export default function PatternsSnapshot() {
   return (
-    <div className="patterns-snapshot">
-      <div className="patterns-gauge">
-        <div className="patterns-gauge-bar">
-          <div className="patterns-gauge-fill" style={{ width: '78%' }} />
+    <div className="patterns-snapshot" aria-label="Example Dokkit patterns view">
+      <div className="snapshot-heading">
+        <div>
+          <p className="snapshot-kicker">Patterns</p>
+          <p className="snapshot-title">A few things Dokkit has noticed</p>
         </div>
-        <span className="patterns-gauge-label">
-          Your estimates are usually spot on
-        </span>
       </div>
-
-      <div className="patterns-row">
-        <span className="patterns-row-task">Revise quote</span>
-        <span className="patterns-row-duration mono">usually ~45m</span>
-        <span className="patterns-row-confidence">well known</span>
-      </div>
-      <div className="patterns-row">
-        <span className="patterns-row-task">Site inspection</span>
-        <span className="patterns-row-duration mono">usually ~30m</span>
-        <span className="patterns-row-confidence">fairly confident</span>
-      </div>
-      <div className="patterns-row">
-        <span className="patterns-row-task">Draft proposal</span>
-        <span className="patterns-row-duration mono">usually ~90m</span>
-        <span className="patterns-row-confidence">well known</span>
-      </div>
-      <div className="patterns-row">
-        <span className="patterns-row-task">Order materials</span>
-        <span className="patterns-row-duration mono">usually ~10m</span>
-        <span className="patterns-row-confidence">just noticed</span>
+      <p className="patterns-observation">
+        Quote revisions have taken less time lately than you first allowed for.
+      </p>
+      <div className="patterns-list">
+        {observations.map(([task, duration, confidence]) => (
+          <div className="patterns-row" key={task}>
+            <span className="patterns-row-task">{task}</span>
+            <span className="patterns-row-duration mono">{duration}</span>
+            <span className="patterns-row-confidence">{confidence}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

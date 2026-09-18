@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/favicon.ico",
+        destination: "/icon",
+      },
+      {
         source: "/app",
         destination: "https://task-manager-one-chi-75.vercel.app/app",
       },

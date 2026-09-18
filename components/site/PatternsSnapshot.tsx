@@ -1,7 +1,12 @@
-const observations = [
-  ['Quote revision', 'usually 45m', 'well known'],
-  ['Site visit', 'usually 30m', 'fairly confident'],
-  ['Material order', 'usually 10m', 'just noticed'],
+const signals = [
+  'Website updates often move to the next work day.',
+  'Quote revisions have been landing closer to the time you allow.',
+];
+
+const clusters = [
+  { label: 'Quote revision', meta: '~45m', note: '×12' },
+  { label: 'Site visit', meta: '~30m', note: '×8' },
+  { label: 'Material order', meta: '~10m', note: '×5' },
 ];
 
 export default function PatternsSnapshot() {
@@ -10,18 +15,30 @@ export default function PatternsSnapshot() {
       <div className="snapshot-heading">
         <div>
           <p className="snapshot-kicker">Patterns</p>
-          <p className="snapshot-title">A few things Dokkit has noticed</p>
+          <p className="snapshot-title">Worth noticing</p>
         </div>
+        <span className="snapshot-count">Estimate feel · on track</span>
       </div>
       <p className="patterns-observation">
-        Quote revisions have taken less time lately than you first allowed for.
+        Quiet signals that tend to change how your day fits—not a score, just what
+        the work has taught so far.
       </p>
       <div className="patterns-list">
-        {observations.map(([task, duration, confidence]) => (
-          <div className="patterns-row" key={task}>
-            <span className="patterns-row-task">{task}</span>
-            <span className="patterns-row-duration mono">{duration}</span>
-            <span className="patterns-row-confidence">{confidence}</span>
+        {signals.map((line) => (
+          <div className="patterns-row" key={line}>
+            <span className="patterns-row-task">{line}</span>
+          </div>
+        ))}
+      </div>
+      <p className="snapshot-note" style={{ marginTop: '1rem', marginBottom: '0.5rem' }}>
+        Repeating work
+      </p>
+      <div className="patterns-list">
+        {clusters.map((c) => (
+          <div className="patterns-row" key={c.label}>
+            <span className="patterns-row-task">{c.label}</span>
+            <span className="patterns-row-duration mono">{c.meta}</span>
+            <span className="patterns-row-confidence">{c.note}</span>
           </div>
         ))}
       </div>

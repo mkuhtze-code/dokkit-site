@@ -12,8 +12,9 @@ export default function DokkitMark({ decorative = false, className = '' }: Dokki
       alt={decorative ? '' : 'Dokkit'}
       aria-hidden={decorative || undefined}
       className={`dokkit-mark ${className}`}
-      width={512}
-      height={512}
+      width={64}
+      height={64}
+      style={{ width: 'auto', height: 'auto', maxWidth: '100%' }}
     />
   );
 }

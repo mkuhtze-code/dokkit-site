@@ -36,6 +36,10 @@ const questions = [
     'A quiet place for signals that tend to change how your day fits—carry habits, estimate feel, recurring work—not a scorecard.',
   ],
   [
+    'What are Meetings for?',
+    'A place to hold time with people against the job: who was there, what was decided, and what still needs doing. Fixed meeting time still counts toward the day. It is not a second calendar or an AI notes app.',
+  ],
+  [
     'Does Dokkit work on mobile?',
     'Yes. Dokkit works on the web and is designed to remain useful when you are moving between jobs and locations.',
   ],

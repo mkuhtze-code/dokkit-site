@@ -4,7 +4,7 @@ import { AppLink } from '@/components/site/SiteChrome';
 export const metadata: Metadata = {
   title: 'Features',
   description:
-    'Today that fits, honest capacity, selective carry, Jobs, Patterns, Travel and calendar—Dokkit surfaces that observe real work.',
+    'Today that fits, honest capacity, selective carry, Jobs, Meetings, Patterns, Travel and calendar—Dokkit surfaces that observe real work.',
 };
 
 const features = [
@@ -27,6 +27,10 @@ const features = [
   [
     'Jobs',
     'Multi-day work as a lens over the same tasks—remaining time, what’s on today and what comes next.',
+  ],
+  [
+    'Meetings',
+    'Hold the conversation against the job: people, place, decisions and actions—without another system of record.',
   ],
   [
     'Patterns',

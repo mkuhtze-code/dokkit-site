@@ -13,6 +13,7 @@ const included = [
   'Honest capacity when estimates are missing',
   'Selective carry with clear reasons',
   'Jobs',
+  'Meetings',
   'Patterns',
   'Travel planning',
   'Calendar integration where supported',

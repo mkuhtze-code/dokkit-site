@@ -3,6 +3,7 @@ import DayRailDemo from '@/components/site/DayRailDemo';
 import ThinkingDemo from '@/components/site/ThinkingDemo';
 import ReshuffleDemo from '@/components/site/ReshuffleDemo';
 import JobsSnapshot from '@/components/site/JobsSnapshot';
+import MeetingsSnapshot from '@/components/site/MeetingsSnapshot';
 import TravelSnapshot from '@/components/site/TravelSnapshot';
 import PatternsSnapshot from '@/components/site/PatternsSnapshot';
 import FaqList from '@/components/site/FaqList';
@@ -200,6 +201,29 @@ export default function Home() {
         <Reveal delay={200}>
           <div className="site-section-wide">
             <JobsSnapshot />
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="site-section section-copy">
+        <div className="site-section-inner">
+          <Reveal>
+            <p className="eyebrow">Meetings</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2>The conversation stays with the work.</h2>
+          </Reveal>
+          <Reveal delay={140}>
+            <p>
+              A meeting is time with people—often about a job, often at a place. Capture
+              what was said, decided and still needs doing, without spinning up another
+              system of record.
+            </p>
+          </Reveal>
+        </div>
+        <Reveal delay={200}>
+          <div className="site-section-wide">
+            <MeetingsSnapshot />
           </div>
         </Reveal>
       </section>

@@ -56,7 +56,7 @@ export default function PricingPage() {
           <div>
             <p className="eyebrow">Dokkit</p>
             <p className="price">
-              NZ$6<span className="price-interval">/month</span>
+              USD$6<span className="price-interval">/month</span>
             </p>
             <p>Jobs, Meetings, Travel, and calendar.</p>
           </div>

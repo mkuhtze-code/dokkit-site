@@ -45,7 +45,7 @@ const questions = [
   ],
   [
     'Is Dokkit free?',
-    'Yes for the core experience: Today, tasks, Reality Check, and learning. Jobs, Meetings, Travel, and calendar integration are on the Dokkit plan (NZ$6/month). You can start without a card.',
+    'Yes for the core experience: Today, tasks, Reality Check, and learning. Jobs, Meetings, Travel, and calendar integration are on the Dokkit plan ($6/month). You can start without a card.',
   ],
   [
     'What is on the Dokkit plan?',

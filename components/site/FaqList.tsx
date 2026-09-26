@@ -45,11 +45,15 @@ const questions = [
   ],
   [
     'Is Dokkit free?',
-    'Yes. The current Dokkit experience is free, with no credit card and no trial period.',
+    'Yes for the core experience: Today, tasks, Reality Check, and learning. Jobs, Meetings, Travel, and calendar integration are on the Dokkit plan (NZ$6/month). You can start without a card.',
+  ],
+  [
+    'What is on the Dokkit plan?',
+    'Jobs, Meetings, Travel, and Microsoft Calendar integration—alongside everything in Free. Manage the plan from Account → Billing in the app.',
   ],
   [
     'Can I use it with my calendar?',
-    'Yes. Dokkit supports Microsoft Calendar integration where available, so existing commitments can stay part of the picture.',
+    'Calendar connection is part of the Dokkit plan. When connected, existing commitments can stay part of the picture (Microsoft Calendar where supported).',
   ],
   [
     'Who is Dokkit for?',

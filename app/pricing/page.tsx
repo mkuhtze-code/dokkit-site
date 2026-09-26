@@ -70,8 +70,9 @@ export default function PricingPage() {
       </div>
 
       <p className="page-note">
-        No urgency, no trial traps. Upgrade or cancel from Account → Billing in the app.
-        Price is confirmed at checkout; currency follows Stripe configuration.
+        No urgency, no trial traps, no forced trial. Price is <strong>USD $6/month</strong>,
+        confirmed at Stripe Checkout. Upgrade or cancel anytime from Account → Billing in the app.
+        Support: <a href="mailto:support@dokkit.space">support@dokkit.space</a>.
       </p>
     </main>
   );

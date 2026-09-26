@@ -4,7 +4,7 @@ import { AppLink } from '@/components/site/SiteChrome';
 export const metadata: Metadata = {
   title: 'Pricing',
   description:
-    'Start free with Today and core planning. Dokkit plan adds Jobs, Meetings, Travel, and calendar — NZ$6/month.',
+    'Start free with Today and core planning. Dokkit plan adds Jobs, Meetings, Travel, and calendar — USD$6/month.',
 };
 
 const freeIncluded = [
@@ -41,7 +41,7 @@ export default function PricingPage() {
         <section className="pricing-card">
           <div>
             <p className="eyebrow">Free</p>
-            <p className="price">NZ$0</p>
+            <p className="price">USD$0</p>
             <p>Core planning without a card.</p>
           </div>
           <ul>

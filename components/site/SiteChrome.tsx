@@ -38,7 +38,8 @@ export function SiteFooter() {
         </div>
         <div className="footer-links" aria-label="Footer navigation">
           <div><strong>Explore</strong><Link href="/how-it-works">How it works</Link><Link href="/features">Features</Link><Link href="/pricing">Pricing</Link><Link href="/about">About</Link><Link href="/faq">FAQ</Link></div>
-          <div><strong>Legal</strong><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><AppLink className="footer-app-link">Try Dokkit</AppLink></div>
+          <div><strong>Legal</strong><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link></div>
+          <div><strong>Help</strong><a href="mailto:support@dokkit.space">support@dokkit.space</a><AppLink className="footer-app-link">Try Dokkit</AppLink></div>
         </div>
       </div>
       <p className="site-copyright">© {new Date().getFullYear()} Dokkit</p>

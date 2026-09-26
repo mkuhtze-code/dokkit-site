@@ -4,20 +4,25 @@ import { AppLink } from '@/components/site/SiteChrome';
 export const metadata: Metadata = {
   title: 'Pricing',
   description:
-    'Dokkit is free: a personal thinking tool that observes work and adapts around you.',
+    'Start free with Today and core planning. Dokkit plan adds Jobs, Meetings, Travel, and calendar — NZ$6/month.',
 };
 
-const included = [
+const freeIncluded = [
   'Today that fits the day you actually have',
   'Capture without ceremony',
   'Honest capacity when estimates are missing',
   'Selective carry with clear reasons',
-  'Jobs',
-  'Meetings',
-  'Patterns',
-  'Travel planning',
-  'Calendar integration where supported',
-  'Web access, ready for the field',
+  'Reality Check and learning from what actually happened',
+  'Patterns where available',
+  'Account, preferences, and web access',
+];
+
+const dokkitIncluded = [
+  'Everything in Free',
+  'Jobs — multi-day work in one place',
+  'Meetings — people, decisions, and follow-ups against the job',
+  'Travel — trips, stops, and what fits around time away',
+  'Calendar integration (Microsoft, where supported)',
 ];
 
 export default function PricingPage() {
@@ -25,27 +30,48 @@ export default function PricingPage() {
     <main className="page-main">
       <section className="page-intro">
         <p className="eyebrow">Pricing</p>
-        <h1>Free, on purpose.</h1>
+        <h1>Start free. Grow when it fits.</h1>
         <p>
-          Dokkit is currently free. No credit card and no trial period—just a tool that
-          adapts around the way you work.
+          Free is real Dokkit — Today, tasks, and learning. The Dokkit plan adds Jobs,
+          Meetings, Travel, and calendar when you want more room.
         </p>
       </section>
-      <section className="pricing-card">
-        <div>
-          <p className="eyebrow">Dokkit</p>
-          <p className="price">Free</p>
-          <p>Full access to the current Dokkit experience.</p>
-        </div>
-        <ul>
-          {included.map((item) => (
-            <li key={item}>✓ {item}</li>
-          ))}
-        </ul>
-        <AppLink>Try Dokkit</AppLink>
-      </section>
+
+      <div className="pricing-grid">
+        <section className="pricing-card">
+          <div>
+            <p className="eyebrow">Free</p>
+            <p className="price">NZ$0</p>
+            <p>Core planning without a card.</p>
+          </div>
+          <ul>
+            {freeIncluded.map((item) => (
+              <li key={item}>✓ {item}</li>
+            ))}
+          </ul>
+          <AppLink>Try Dokkit</AppLink>
+        </section>
+
+        <section className="pricing-card pricing-card-emphasis">
+          <div>
+            <p className="eyebrow">Dokkit</p>
+            <p className="price">
+              NZ$6<span className="price-interval">/month</span>
+            </p>
+            <p>Jobs, Meetings, Travel, and calendar.</p>
+          </div>
+          <ul>
+            {dokkitIncluded.map((item) => (
+              <li key={item}>✓ {item}</li>
+            ))}
+          </ul>
+          <AppLink>Get Dokkit</AppLink>
+        </section>
+      </div>
+
       <p className="page-note">
-        Pricing may evolve as Dokkit grows. If it does, this page will explain it plainly.
+        No urgency, no trial traps. Upgrade or cancel from Account → Billing in the app.
+        Price is confirmed at checkout; currency follows Stripe configuration.
       </p>
     </main>
   );

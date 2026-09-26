@@ -37,8 +37,8 @@ export default function Home() {
           <Reveal delay={160}>
             <p className="section-lead">
               Dokkit is a personal thinking tool that observes how you work and quietly
-              adapts around you. Your plans change. Your priorities change. Your days
-              change. Dokkit changes with them.
+              adapts around you—not a chatbot and not a productivity scoreboard. Your plans
+              change. Your priorities change. Your days change. Dokkit changes with them.
             </p>
           </Reveal>
           <Reveal delay={220}>

@@ -15,7 +15,7 @@ const jobs = [
     name: 'Kauri build',
     meta: 'Open',
     next: 'Order flashing',
-    time: '3',
+    time: '~3h',
   },
 ];
 

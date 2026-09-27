@@ -12,10 +12,10 @@ import DokkitMark from '@/components/site/DokkitMark';
 import { AppLink } from '@/components/site/SiteChrome';
 
 const steps = [
-  'Capture what needs doing.',
-  'Let Dokkit observe what the work is like.',
-  'Dokkit remembers what matters.',
-  'Reality changes? Dokkit reshapes the plan.',
+  'Get the work out of your head.',
+  'See what still fits the day you have.',
+  'Check reality—not the plan you hoped for.',
+  'Dokkit learns, so the next day is more honest.',
 ];
 
 export default function Home() {
@@ -36,14 +36,14 @@ export default function Home() {
           </Reveal>
           <Reveal delay={160}>
             <p className="section-lead">
-              Dokkit is a personal thinking tool that observes how you work and quietly
-              adapts around you—not a chatbot and not a productivity scoreboard. Your plans
-              change. Your priorities change. Your days change. Dokkit changes with them.
+              Stop carrying the whole day in your head. Dokkit holds the work, shows what
+              still fits, and learns from what actually happened—not a chatbot, not a
+              scoreboard, not another system to maintain.
             </p>
           </Reveal>
           <Reveal delay={220}>
             <div className="cta-row">
-              <AppLink>Try Dokkit</AppLink>
+              <AppLink>Start free</AppLink>
               <a href="#how-it-works" className="btn btn-ghost">
                 How it works
               </a>
@@ -54,6 +54,10 @@ export default function Home() {
           <div className="site-section-wide">
             <div className="demo-card">
               <DayRailDemo />
+              <p className="page-note" style={{ marginTop: '0.75rem', marginBottom: 0 }}>
+                Illustrative—real Today reflects your tasks, work hours, and what Dokkit
+                has learned from you.
+              </p>
             </div>
           </div>
         </Reveal>
@@ -261,9 +265,9 @@ export default function Home() {
           </Reveal>
           <Reveal delay={140}>
             <p>
-              Not a report card. Quiet signals that tend to change how your day fits—carry
-              habits, estimate feel and recurring work—so Dokkit can become more like you
-              over time.
+              Not a report card. Quiet signals—what tends to carry, how estimates land,
+              work that repeats—so the next plan is a little closer to how you actually
+              work.
             </p>
           </Reveal>
         </div>
@@ -277,15 +281,15 @@ export default function Home() {
       <section className="site-section section-copy split-section">
         <div className="site-section-inner">
           <div>
-            <p className="eyebrow">Your calendar, alongside Dokkit</p>
+            <p className="eyebrow">Alongside the calendar you already use</p>
             <h2>
-              Your calendar tells you where you have to be. Dokkit helps you understand
-              what can move around it.
+              Fixed time is real. The rest of the day still needs a plan that can move.
             </h2>
             <p>
-              Keep using the calendar you already rely on. Microsoft Calendar integration
-              can bring existing commitments into view while Dokkit adapts the work around
-              them.
+              Dokkit is built to respect commitments you already have—site visits, calls,
+              anything that does not slide. Full calendar sync is on the roadmap; until
+              then you still get a clear picture of the work that has to fit around what
+              is fixed.
             </p>
           </div>
           <div className="quiet-card">
@@ -293,7 +297,7 @@ export default function Home() {
             <strong>Site visit</strong>
             <span className="mono">11:15</span>
             <strong>Client call</strong>
-            <p>Work arranged around what is already fixed.</p>
+            <p>The work around fixed time—not a second calendar to maintain.</p>
           </div>
         </div>
       </section>
@@ -304,7 +308,7 @@ export default function Home() {
             <p className="eyebrow">How it works</p>
           </Reveal>
           <Reveal delay={80}>
-            <h2>It becomes more useful because it reflects you.</h2>
+            <h2>Less holding. Clearer fit. Quiet learning.</h2>
           </Reveal>
           <ol className="steps-list">
             {steps.map((step, index) => (
@@ -344,7 +348,7 @@ export default function Home() {
             <p className="eyebrow">Questions</p>
           </Reveal>
           <Reveal delay={80}>
-            <h2>Clear about what Dokkit is for.</h2>
+            <h2>Straight answers.</h2>
           </Reveal>
           <FaqList />
           <Link href="/faq" className="text-link">
@@ -383,12 +387,12 @@ export default function Home() {
           </Reveal>
           <Reveal delay={100}>
             <p>
-              Dokkit adapts to the way you work, so you don&apos;t have to adapt yourself
-              to the tool.
+              Put the load down. See what fits. Let the tool learn you—not the other way
+              around.
             </p>
           </Reveal>
           <Reveal delay={160}>
-            <AppLink>Try Dokkit</AppLink>
+            <AppLink>Start free</AppLink>
           </Reveal>
         </div>
       </section>

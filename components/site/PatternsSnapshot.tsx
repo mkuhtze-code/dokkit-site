@@ -15,7 +15,7 @@ export default function PatternsSnapshot() {
       <div className="snapshot-heading">
         <div>
           <p className="snapshot-kicker">Patterns</p>
-          <p className="snapshot-title">Worth noticing</p>
+          <p className="snapshot-title">From your work so far</p>
         </div>
         <span className="snapshot-count">Estimate feel · on track</span>
       </div>

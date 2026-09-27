@@ -6,6 +6,10 @@ const DEMO_TEXT = 'Revise quote';
 const TYPE_MS = 70;
 const RESET_PAUSE_MS = 2800;
 
+/**
+ * Capture → learned duration illustration.
+ * Layout height is fixed for every phase so the page below does not jump on reloop.
+ */
 export default function ThinkingDemo() {
   const [typed, setTyped] = useState('');
   const [showSuggestion, setShowSuggestion] = useState(false);
@@ -17,13 +21,16 @@ export default function ThinkingDemo() {
     const timers: ReturnType<typeof setTimeout>[] = [];
 
     function schedule(fn: () => void, delay: number) {
-      const id = setTimeout(() => {
-        if (!cancelled) fn();
-      }, delay);
-      timers.push(id);
+      timers.push(
+        setTimeout(() => {
+          if (!cancelled) fn();
+        }, delay)
+      );
     }
 
     function run() {
+      // Soft reset: clear type first; keep lower slots fading via opacity only
+      // (elements always reserve space — see CSS min-heights).
       setTyped('');
       setShowSuggestion(false);
       setAccepted(false);
@@ -54,29 +61,36 @@ export default function ThinkingDemo() {
       aria-label="Illustration of Dokkit recognizing repeated work and suggesting a usual duration"
     >
       <div className="thinking-demo-input">
-        <span>{typed}</span>
-        <span className="thinking-demo-caret" />
+        <span className="thinking-demo-typed">{typed || '\u00a0'}</span>
+        <span className="thinking-demo-caret" aria-hidden="true" />
       </div>
 
-      <div
-        className={`thinking-demo-chip ${showSuggestion ? 'is-shown' : ''} ${accepted ? 'accepted' : ''}`}
-        aria-hidden={!showSuggestion}
-      >
-        Usually about 45m · 4 times before
+      {/* Reserved slots — always in document flow; only opacity changes */}
+      <div className="thinking-demo-slot thinking-demo-slot-chip">
+        <div
+          className={`thinking-demo-chip${showSuggestion ? ' is-shown' : ''}${accepted ? ' accepted' : ''}`}
+          aria-hidden={!showSuggestion}
+        >
+          Usually about 45m · 4 times before
+        </div>
       </div>
 
-      <div
-        className={`thinking-demo-field mono ${accepted ? 'is-shown' : ''}`}
-        aria-hidden={!accepted}
-      >
-        45m
+      <div className="thinking-demo-slot thinking-demo-slot-field">
+        <div
+          className={`thinking-demo-field mono${accepted ? ' is-shown' : ''}`}
+          aria-hidden={!accepted}
+        >
+          45m
+        </div>
       </div>
 
-      <div
-        className={`thinking-demo-note ${showNote ? 'is-shown' : ''}`}
-        aria-hidden={!showNote}
-      >
-        Capacity just got a little more honest.
+      <div className="thinking-demo-slot thinking-demo-slot-note">
+        <p
+          className={`thinking-demo-note${showNote ? ' is-shown' : ''}`}
+          aria-hidden={!showNote}
+        >
+          Capacity just got a little more honest.
+        </p>
       </div>
     </div>
   );

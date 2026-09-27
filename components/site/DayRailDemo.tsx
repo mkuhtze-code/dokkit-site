@@ -44,7 +44,7 @@ export default function DayRailDemo() {
   const carryingForward = progress >= 90;
 
   return (
-    <section className="rail-demo" aria-label="Animated demonstration of Dokkit understanding what fits into a day">
+    <section className="rail-demo" aria-label="Illustrative example of capacity through a workday">
       <header className="rail-demo-header">
         <div>
           <p className="rail-demo-kicker">Today</p>

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 
-const DEMO_TEXT = 'Revise Quote';
-const TYPE_MS = 90;
-const RESET_PAUSE_MS = 2200;
+const DEMO_TEXT = 'Revise quote';
+const TYPE_MS = 70;
+const RESET_PAUSE_MS = 2800;
 
 export default function ThinkingDemo() {
   const [typed, setTyped] = useState('');
@@ -34,10 +34,10 @@ export default function ThinkingDemo() {
       });
 
       const afterType = DEMO_TEXT.length * TYPE_MS;
-      schedule(() => setShowSuggestion(true), afterType + 400);
-      schedule(() => setAccepted(true), afterType + 1800);
-      schedule(() => setShowNote(true), afterType + 2500);
-      schedule(run, afterType + 2500 + RESET_PAUSE_MS);
+      schedule(() => setShowSuggestion(true), afterType + 350);
+      schedule(() => setAccepted(true), afterType + 1600);
+      schedule(() => setShowNote(true), afterType + 2200);
+      schedule(run, afterType + 2200 + RESET_PAUSE_MS);
     }
 
     run();
@@ -51,7 +51,7 @@ export default function ThinkingDemo() {
     <div
       className="thinking-demo"
       role="img"
-      aria-label="Animated demonstration of Dokkit recognizing a repeated task and suggesting how long it usually takes"
+      aria-label="Illustration of Dokkit recognizing repeated work and suggesting a usual duration"
     >
       <div className="thinking-demo-input">
         <span>{typed}</span>
@@ -62,7 +62,7 @@ export default function ThinkingDemo() {
         className={`thinking-demo-chip ${showSuggestion ? 'is-shown' : ''} ${accepted ? 'accepted' : ''}`}
         aria-hidden={!showSuggestion}
       >
-        ≈ 45m usual (4×)
+        Usually about 45m · 4 times before
       </div>
 
       <div

@@ -2,88 +2,147 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+/** Illustrative workday 8:00–16:00. Progress uses transform (smooth); clock updates per minute. */
 const WORK_START_MIN = 8 * 60;
 const WORK_END_MIN = 16 * 60;
-const LOOP_MS = 12000;
+const WORK_SPAN = WORK_END_MIN - WORK_START_MIN;
+const LOOP_MS = 16000;
 
 const TASKS = [
-  { label: 'Client reply', time: '8:45', duration: '15m', atPercent: 11 },
-  { label: 'Revise quote', time: '10:30', duration: '45m', atPercent: 34 },
-  { label: 'Site visit', time: '1:00', duration: '1h', atPercent: 62 },
-  { label: 'Proposal', time: '3:15', duration: '90m', atPercent: 90 },
+  { label: 'Client reply', time: '8:45 am', duration: '15m', atPercent: 10 },
+  { label: 'Revise quote', time: '10:30 am', duration: '45m', atPercent: 32 },
+  { label: 'Site visit', time: '1:00 pm', duration: '1h', atPercent: 58 },
+  { label: 'Draft proposal', time: '3:00 pm', duration: '1h 30m', atPercent: 88 },
 ] as const;
 
-function formatTime(minutesOfDay: number): string {
+function formatClock(minutesOfDay: number): string {
   let hour = Math.floor(minutesOfDay / 60);
   const minute = Math.floor(minutesOfDay % 60);
   const suffix = hour >= 12 ? 'pm' : 'am';
   hour %= 12;
   if (hour === 0) hour = 12;
-  return minute === 0 ? `${hour}${suffix}` : `${hour}:${String(minute).padStart(2, '0')}${suffix}`;
+  return minute === 0
+    ? `${hour}${suffix}`
+    : `${hour}:${String(minute).padStart(2, '0')}${suffix}`;
+}
+
+function formatRemaining(mins: number): string {
+  const m = Math.max(0, Math.round(mins));
+  const h = Math.floor(m / 60);
+  const r = m % 60;
+  if (h === 0) return `${r}m`;
+  if (r === 0) return `${h}h`;
+  return `${h}h ${r}m`;
 }
 
 export default function DayRailDemo() {
-  const [progress, setProgress] = useState(0);
-  const startRef = useRef<number | null>(null);
-  const frameRef = useRef<number>(0);
+  const [clockMin, setClockMin] = useState(WORK_START_MIN);
+  const [progressPct, setProgressPct] = useState(0);
+  const fillRef = useRef<HTMLDivElement>(null);
+  const nowRef = useRef<HTMLSpanElement>(null);
+  const lastShownMin = useRef(-1);
 
   useEffect(() => {
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduced) {
+      const t = 0.4;
+      setClockMin(WORK_START_MIN + WORK_SPAN * t);
+      setProgressPct(40);
+      if (fillRef.current) fillRef.current.style.transform = `scaleX(${t})`;
+      if (nowRef.current) nowRef.current.style.left = `${t * 100}%`;
+      return;
+    }
+
+    let raf = 0;
+    const start = performance.now();
+
     const tick = (now: number) => {
-      startRef.current ??= now;
-      setProgress(((now - startRef.current) % LOOP_MS) / LOOP_MS * 100);
-      frameRef.current = requestAnimationFrame(tick);
+      const t = ((now - start) % LOOP_MS) / LOOP_MS;
+      if (fillRef.current) fillRef.current.style.transform = `scaleX(${t})`;
+      if (nowRef.current) nowRef.current.style.left = `${t * 100}%`;
+
+      const minutesOfDay = WORK_START_MIN + t * WORK_SPAN;
+      const rounded = Math.floor(minutesOfDay);
+      if (rounded !== lastShownMin.current) {
+        lastShownMin.current = rounded;
+        setClockMin(rounded);
+        setProgressPct(Math.round(t * 100));
+      }
+      raf = requestAnimationFrame(tick);
     };
 
-    frameRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frameRef.current);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
-  const currentMinutes = WORK_START_MIN + (progress / 100) * (WORK_END_MIN - WORK_START_MIN);
-  const remainingMinutes = Math.max(0, Math.round(WORK_END_MIN - currentMinutes));
-  const completedCount = TASKS.filter((task) => progress >= task.atPercent && task.atPercent !== 90).length;
-  const carryingForward = progress >= 90;
+  const remaining = Math.max(0, WORK_END_MIN - clockMin);
+  const completedCount = TASKS.filter(
+    (task) => progressPct >= task.atPercent && task.atPercent < 88
+  ).length;
+  const carryingForward = progressPct >= 88;
 
   return (
-    <section className="rail-demo" aria-label="Illustrative example of capacity through a workday">
+    <section
+      className="rail-demo"
+      aria-label="Illustrative example of capacity through a workday"
+    >
       <header className="rail-demo-header">
         <div>
           <p className="rail-demo-kicker">Today</p>
-          <p className="rail-demo-time mono">{formatTime(currentMinutes)}</p>
+          <p className="rail-demo-time mono">{formatClock(clockMin)}</p>
         </div>
         <div className="rail-demo-capacity">
-          <span className="rail-demo-capacity-value mono">{Math.floor(remainingMinutes / 60)}h {remainingMinutes % 60}m</span>
+          <span className="rail-demo-capacity-value mono">
+            {formatRemaining(remaining)}
+          </span>
           <span>left to work with</span>
         </div>
       </header>
 
       <div className="rail-demo-progress" aria-hidden="true">
-        <div className="rail-demo-progress-fill" style={{ width: `${progress}%` }} />
-        <span className="rail-demo-progress-now" style={{ left: `${progress}%` }} />
+        <div ref={fillRef} className="rail-demo-progress-fill" />
+        <span ref={nowRef} className="rail-demo-progress-now" />
       </div>
 
       <div className="rail-demo-summary">
-        <span>{completedCount} of 3 planned tasks done</span>
-        <span>{carryingForward ? 'one task carried forward' : 'the day still fits'}</span>
+        <span>
+          {carryingForward
+            ? 'Day is full — long work can wait until tomorrow'
+            : completedCount === 0
+              ? 'Morning open · the day still fits'
+              : `${completedCount} done · still room if estimates hold`}
+        </span>
       </div>
 
-      <ol className="rail-demo-list">
+      <div className="rail-demo-tasks">
         {TASKS.map((task) => {
-          const complete = task.atPercent !== 90 && progress >= task.atPercent;
-          const carrying = task.atPercent === 90 && carryingForward;
-          const state = carrying ? 'carrying' : complete ? 'complete' : 'planned';
-
+          const isComplete =
+            progressPct >= task.atPercent && task.atPercent < 88;
+          const isCarrying = task.atPercent >= 88 && carryingForward;
           return (
-            <li className={`rail-demo-task is-${state}`} key={task.label}>
-              <span className="rail-demo-status" aria-hidden="true">{complete ? '✓' : carrying ? '→' : ''}</span>
-              <span className="rail-demo-task-copy">
+            <div
+              key={task.label}
+              className={[
+                'rail-demo-task',
+                isComplete ? 'is-complete' : '',
+                isCarrying ? 'is-carrying' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+            >
+              <span className="rail-demo-status" aria-hidden="true" />
+              <div className="rail-demo-task-copy">
                 <strong>{task.label}</strong>
-                <span>{carrying ? 'carrying forward' : task.time}</span>
-              </span>
+                <span>{task.time}</span>
+              </div>
               <span className="rail-demo-duration mono">{task.duration}</span>
-            </li>
+            </div>
           );
         })}
-      </ol>
+      </div>
     </section>
   );
 }

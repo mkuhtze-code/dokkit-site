@@ -4,9 +4,9 @@ const signals = [
 ];
 
 const clusters = [
-  { label: 'Quote revision', meta: '~45m', note: '×12' },
-  { label: 'Site visit', meta: '~30m', note: '×8' },
-  { label: 'Material order', meta: '~10m', note: '×5' },
+  { label: 'Quote revision', meta: '≈ 45m', note: '12×' },
+  { label: 'Site visit', meta: '≈ 1h', note: '8×' },
+  { label: 'Material order', meta: '≈ 15m', note: '5×' },
 ];
 
 export default function PatternsSnapshot() {
@@ -17,11 +17,10 @@ export default function PatternsSnapshot() {
           <p className="snapshot-kicker">Patterns</p>
           <p className="snapshot-title">From your work so far</p>
         </div>
-        <span className="snapshot-count">Estimate feel · on track</span>
+        <span className="snapshot-count">Quiet signals</span>
       </div>
       <p className="patterns-observation">
-        Quiet signals that tend to change how your day fits—not a score, just what
-        the work has taught so far.
+        Not a score—just what tends to change how your day fits.
       </p>
       <div className="patterns-list">
         {signals.map((line) => (
@@ -31,7 +30,7 @@ export default function PatternsSnapshot() {
         ))}
       </div>
       <p className="snapshot-note" style={{ marginTop: '1rem', marginBottom: '0.5rem' }}>
-        Repeating work
+        Familiar work
       </p>
       <div className="patterns-list">
         {clusters.map((c) => (

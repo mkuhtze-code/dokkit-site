@@ -283,3 +283,90 @@ h2 { margin-bottom: var(--space-6); font-size: var(--text-display-sm); font-weig
 .final-cta-mark { width: 38px; height: 38px; margin: 0 auto var(--space-5); opacity: 0.72; }
 @media (max-width: 520px) { .hero-mark { top: -8px; width: 38px; height: 38px; } }
 @media (max-width: 720px) { .split-section .site-section-inner { grid-template-columns: 1fr; } .site-footer-inner { flex-direction: column; gap: var(--space-8); } .footer-links { flex-wrap: wrap; gap: var(--space-8); } .site-nav-links { display: none; } .site-menu { display: block; } }
+/* Merge into app/globals.css — ThinkingDemo stable layout */
+
+.thinking-demo {
+  min-height: 11.5rem;
+}
+
+.thinking-demo-slot {
+  display: flex;
+  align-items: flex-start;
+}
+
+.thinking-demo-slot-chip {
+  min-height: 2.5rem;
+  margin-top: var(--space-3);
+}
+
+.thinking-demo-slot-field {
+  min-height: 3rem;
+  margin-top: var(--space-3);
+}
+
+.thinking-demo-slot-note {
+  min-height: 1.5rem;
+  margin-top: var(--space-3);
+}
+
+.thinking-demo-typed {
+  min-width: 1ch;
+}
+
+/* Opacity only — do not animate height, margin, or transform on reloop */
+.thinking-demo-chip {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--steel-wash);
+  color: var(--steel);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-sm);
+  opacity: 0;
+  transform: none;
+  transition: opacity 300ms var(--ease), background 300ms var(--ease), color 300ms var(--ease);
+}
+
+.thinking-demo-chip.is-shown {
+  opacity: 1;
+}
+
+.thinking-demo-chip.accepted {
+  background: var(--steel);
+  color: #fff;
+}
+
+.thinking-demo-field {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--steel);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--steel);
+  font-size: var(--text-md);
+  font-weight: 600;
+  opacity: 0;
+  transform: none;
+  transition: opacity 300ms var(--ease);
+}
+
+.thinking-demo-field.is-shown {
+  opacity: 1;
+}
+
+.thinking-demo-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 400ms var(--ease);
+}
+
+.thinking-demo-note.is-shown {
+  opacity: 1;
+}

@@ -1,64 +1,73 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { AppLink } from '@/components/site/SiteChrome';
 
 export const metadata: Metadata = {
   title: 'How it works',
   description:
-    'See how Dokkit observes what work is like, remembers it, and adapts when plans change—including untimed work and selective carry.',
+    'Capture work, see what fits, check reality, and let Dokkit learn—without performing for a productivity system.',
 };
 
-const sections = [
-  [
-    'Start with the work you have',
-    'Dokkit begins with the day as it is: commitments, travel, jobs and the work already in motion.',
-  ],
-  [
-    'Let work take its natural shape',
-    'Tasks can carry an estimate, belong to a job, change order and move as the situation does. Untimed work still has a soft cost so the day doesn’t look empty when it isn’t.',
-  ],
-  [
-    'Remember what actually happened',
-    'Completed work feeds a quiet learning loop. Observed durations, carry habits and familiar patterns become part of how Dokkit reads the next day.',
-  ],
-  [
-    'Adapt the plan',
-    'When work arrives or circumstances change, Dokkit reshapes the plan around what actually happened and makes the trade-offs visible.',
-  ],
-  [
-    'Carry work forward',
-    'Unfinished work is not a failure. Items that usually move can shift to the next work day with a clear reason; work you typically finish the same day stays protected.',
-  ],
-  [
-    'Build a clearer picture',
-    'Patterns surfaces decision-useful signals—estimate feel, carry habits, recurring work—enough context for Dokkit to become more representative of you, without scoring the day.',
-  ],
-] as const;
+const steps = [
+  {
+    title: 'Get it out of your head',
+    body: 'Capture what needs doing—without ceremony. Dokkit holds it so you do not have to.',
+  },
+  {
+    title: 'See what fits today',
+    body: 'Today shows load and remaining time. Untimed work still counts. Fixed commitments stay visible even before calendar sync is complete.',
+  },
+  {
+    title: 'Act, wait, or carry',
+    body: 'Finish what belongs. Let the rest wait or move with a clear reason—not a guilt score.',
+  },
+  {
+    title: 'Check reality',
+    body: 'When the day ends (or when you are ready), Reality Check compares the plan with what happened.',
+  },
+  {
+    title: 'Dokkit learns quietly',
+    body: 'Durations, carry habits, and patterns update in the background. Next day’s plan gets a little closer to you.',
+  },
+];
 
 export default function HowItWorksPage() {
   return (
     <main className="page-main">
       <section className="page-intro">
         <p className="eyebrow">How it works</p>
-        <h1>Dokkit observes, remembers and adapts.</h1>
+        <h1>Less holding. Clearer decisions. Better fit.</h1>
         <p>
-          You should not have to reshape your day to fit the tool. Dokkit is built to
-          reflect the way your work actually unfolds.
+          Dokkit is not trying to make you do more. It helps you carry less, understand
+          what matters, and decide what fits—then learns from reality instead of
+          intention alone.
         </p>
       </section>
-      <section className="content-list">
-        {sections.map(([title, copy], index) => (
-          <article key={title}>
-            <span className="content-index mono">{String(index + 1).padStart(2, '0')}</span>
-            <div>
-              <h2>{title}</h2>
-              <p>{copy}</p>
-            </div>
-          </article>
-        ))}
+
+      <section className="prose-section">
+        <ol className="steps-list">
+          {steps.map((step, index) => (
+            <li key={step.title}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <strong>{step.title}</strong>
+                <p style={{ margin: '0.35rem 0 0', color: 'inherit', opacity: 0.9 }}>
+                  {step.body}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </section>
+
       <section className="final-cta compact-cta">
-        <h2>Start with the work you have.</h2>
+        <h2>Start with the day you have.</h2>
         <AppLink>Try Dokkit</AppLink>
+        <p style={{ marginTop: '1rem' }}>
+          <Link href="/pricing" className="text-link">
+            Free vs Dokkit plan
+          </Link>
+        </p>
       </section>
     </main>
   );

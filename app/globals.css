@@ -115,9 +115,28 @@ h2 { margin-bottom: var(--space-6); font-size: var(--text-display-sm); font-weig
 .rail-demo-time { margin: 0; color: var(--signature); font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 650; letter-spacing: -0.06em; line-height: 0.95; }
 .rail-demo-capacity { display: flex; flex-direction: column; align-items: flex-end; color: var(--ink-faint); font-size: var(--text-xs); line-height: 1.35; text-align: right; }
 .rail-demo-capacity-value { color: var(--ink); font-size: var(--text-sm); font-weight: 650; }
-.rail-demo-progress { position: relative; height: 10px; overflow: visible; border-radius: 99px; background: var(--line); }
-.rail-demo-progress-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--steel), var(--signature)); transition: width 80ms linear; }
-.rail-demo-progress-now { position: absolute; top: 50%; width: 16px; height: 16px; border: 3px solid var(--paper-raised); border-radius: 50%; background: var(--signature); box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.22); transform: translate(-50%, -50%); transition: left 80ms linear; }
+.rail-demo-progress { position: relative; height: 8px; overflow: visible; border-radius: 99px; background: var(--line); }
+.rail-demo-progress-fill {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--steel), var(--signature));
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+  /* No CSS transition — driven every frame via transform for smooth motion */
+}
+.rail-demo-progress-now {
+  position: absolute; top: 50%; left: 0;
+  width: 14px; height: 14px;
+  border: 3px solid var(--paper-raised);
+  border-radius: 50%;
+  background: var(--signature);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--signature) 25%, transparent);
+  transform: translate(-50%, -50%);
+  will-change: left;
+  pointer-events: none;
+}
 .rail-demo-summary { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) 0 var(--space-4); color: var(--ink-soft); font-size: var(--text-xs); }
 .rail-demo-summary span:last-child { color: var(--steel); font-weight: 600; text-align: right; }
 .rail-demo-list { display: grid; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
@@ -136,7 +155,7 @@ h2 { margin-bottom: var(--space-6); font-size: var(--text-display-sm); font-weig
 @keyframes blink { 50% { opacity: 0; } }
 
 .reshuffle-demo-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-2); }.reshuffle-demo-header-label, .reshuffle-demo-header-value { font-size: var(--text-sm); }.reshuffle-demo-header-label { color: var(--ink-soft); }.reshuffle-demo-header-value { font-weight: 600; }
-.reshuffle-demo-bar-track { height: 4px; margin-bottom: var(--space-6); border-radius: 2px; background: var(--line); }.reshuffle-demo-bar-fill { height: 100%; border-radius: 2px; background: var(--steel); transition: width 600ms var(--ease); }
+.reshuffle-demo-bar-track { height: 4px; margin-bottom: var(--space-6); border-radius: 2px; background: var(--line); }.reshuffle-demo-bar-fill { height: 100%; border-radius: 2px; background: var(--steel); transition: width 600ms var(--ease); }.reshuffle-demo-bar-fill.is-over { background: var(--hazard); }
 .reshuffle-demo-list { position: relative; height: 216px; }.reshuffle-demo-item { position: absolute; right: 0; left: 0; display: flex; align-items: center; gap: var(--space-3); height: 54px; padding: 0 var(--space-4); border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper-raised); transition: transform 600ms var(--spring), opacity 400ms var(--ease), background 400ms var(--ease), border-color 400ms var(--ease); }.reshuffle-demo-item.overflow { border-color: var(--hazard); background: var(--hazard-bg); }
 .reshuffle-demo-dot { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; }.reshuffle-demo-dot.fits { background: var(--moss); }.reshuffle-demo-dot.hazard { background: var(--hazard); }.reshuffle-demo-label { flex: 1; font-size: var(--text-sm); }.reshuffle-demo-mins { color: var(--ink-soft); font-size: var(--text-sm); font-weight: 500; }.reshuffle-demo-tag { padding: 2px 8px; border-radius: 100px; background: var(--paper); color: var(--hazard); font-family: var(--font-label), var(--font-mono), monospace; font-size: 10px; letter-spacing: 0.05em; white-space: nowrap; }.reshuffle-demo-note { margin: var(--space-4) 0 0; opacity: 0; transition: opacity 400ms var(--ease); }
 
